@@ -1,3 +1,5 @@
+local QBCore = exports['qb-core']:GetCoreObject()
+
 local blackjackTables = {
     --[chairId] == false or source if taken
 }
@@ -12,11 +14,23 @@ local blackjackGameData = {}
 function tryTakeChips(source,amount)
     --returns true if taken chips succesfully
     --returns false if doesn't have enough chips
-    return true
+    local Amount = 0
+    local Player = QBCore.Functions.GetPlayer(source)
+    if Player then
+        local Item = Player.Functions.GetItemByName('casinochips')
+        if Item then
+            Amount = Item.amount
+        end
+    end
+    return Amount
 end
 
 function giveChips(source,amount)
     --gives amount in chips to source
+    local Player = QBCore.Functions.GetPlayer(source)
+    if Player then
+        Player.Functions.AddItem('casinochips', amount)
+    end
 end
 
 AddEventHandler('playerDropped', function (reason)
