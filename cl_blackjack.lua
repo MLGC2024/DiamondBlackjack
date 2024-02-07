@@ -358,6 +358,7 @@ Citizen.CreateThread(function()
             if IsDisabledControlJustPressed(0, 22) then --hit
                 waitingForStandOrHitState = false
                 TriggerServerEvent("Blackjack:hitBlackjack",globalGameId,globalNextCardCount)
+                TriggerEvent('wais:addmissionxp:hitbj', 1) --added by pamela for wais battlepass
                 drawTimerBar = false
                 standOrHitThisRound = true
                 requestCard()
@@ -365,6 +366,7 @@ Citizen.CreateThread(function()
             if IsControlJustPressed(0, 202) then --stand
                 waitingForStandOrHitState = false
                 TriggerServerEvent("Blackjack:standBlackjack",globalGameId,globalNextCardCount)
+                TriggerEvent('wais:addmissionxp:standbj', 1) --added by pamela for wais battlepass
                 drawTimerBar = false
                 standOrHitThisRound = true
                 declineCard()
